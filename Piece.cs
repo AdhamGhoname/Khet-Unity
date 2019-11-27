@@ -6,20 +6,24 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp4
 {
-    enum Type
+    public enum Type
     {
-        sphinx,
-        pyramid,
-        scarab,
-        anubis,
-        pharoah,
-    }
+        sphinx=1,
+        pyramid=2,
+        scarab=3,
+        anubis=4,
+        pharoah=5,
+        empty =0 ,
+    };
 
-    class Piece
+
+    public class Piece
     {
-        char rotation;
-        char color ; 
-        Type type;
+
+        public char rotation;
+        public char color;
+        public Type type;
 
     }
+  
 }
