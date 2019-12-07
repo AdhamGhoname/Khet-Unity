@@ -4,191 +4,171 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace laser_not_final
 {
     class laser_fn
     {
-        static void Main(string[] args)
+        
+        
+        static void shoot_laser(ref Piece[,] piece, int laser_direction, int i, int j)
         {
-
-            string[,] board = new string[8, 10];
-            int[,] pieces = new int[8, 10];
-            string[,] laser = new string[8, 10];
-            string[,] name = new string[8, 10];
-
-
-            board[0, 2] = "RA";
-            board[0, 3] = "RPh";
-            board[0, 4] = "RA";
-            board[2, 5] = "RPy";
-            board[2, 6] = "RPy";
-            board[3, 5] = "RPy";
-            board[5, 1] = "WPy";
-            board[5, 2] = "WPy";
-            board[5, 5] = "WPy";
-            board[6, 1] = "WPy";
-            board[6, 2] = "WPy";
-            board[6, 5] = "WPy";
-            board[7, 3] = "WA";
-            board[7, 4] = "WPh";
-
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    laser[i, j] = " ";
-                    pieces[i, j] = 0;
-                }
-            }
-
-
-              pieces[4, 9] = 3;
-              pieces[6, 8] = 4;
-              pieces[2, 6] = 3;
-              pieces[4, 6] = 1;
-              pieces[2, 4] = 2;
-              pieces[6, 4] = 1;
             
-            name[4, 9] = "Py";
-            name[6, 8] = "Py";
-            name[2, 6] = "S";
-            name[4, 6] = "Py";
-            name[2, 4] = "Py";
-            name[6, 4] = "S";
-
-            /*  pieces[5, 5] = 4;
-                name[5, 5] = "Py";*/
-
-            Laser(pieces, laser , name);
-
-            for (int i = 0; i < 8; i++)
+            while (i >= 0 && j >= 0 && i <= 7 && j <= 9)
             {
-                for (int j = 0; j < 10; j++)
+                
+                if (piece[i, j].type != Type.empty)
                 {
-                    Console.Write(laser[i, j] + ' ');
+                
+                    
+                    switch(piece[i,j].type)
+                    {
+                        case Type.scarab:
+                            {
+                                rotate_laser( ref laser_direction,  piece,  i, j); 
+                                break;
+                            }
+
+
+                        case Type.pyramid:
+                            {
+                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation %4) +1 != laser_direction)
+                                {
+                                    rotate_laser(ref laser_direction, piece, i, j);
+                                }
+
+                                else
+                                {
+                                    piece[i, j].type = Type.empty;
+                                    return;
+                                }
+                                break;
+                            }
+
+                        case Type.anubis:
+                            {
+
+                                if(Math.Abs((int)piece[i, j].rotation - laser_direction) == 2)
+                                {
+                                    piece[i, j].type = Type.empty;
+                                }
+                                return;
+                               
+                            }
+
+                        case Type.pharoah:
+                            {
+
+                                piece[i, j].type = Type.empty;
+                                return;
+                              
+                            }
+
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                    
                 }
-                Console.WriteLine();
+
+               
+                new_laser_pos(laser_direction, ref i, ref j);
+
             }
 
-           
-            /*  int x = CheckBoard(board);
-              Console.WriteLine(x);*/
+
         }
 
 
 
 
-        static int CheckBoard(string[,] board)
-        {
-
-            int my_board = 0;
-            int opp_board = 0;
-
-
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (board[i, j] == "WA")
-                    {
-                        opp_board += 4;
-                    }
-                    else if (board[i, j] == "WPy")
-                    {
-                        opp_board += 2;
-                    }
-                    else if (board[i, j] == "WPh")
-                    {
-                        opp_board += 100;
-                    }
-
-
-                    else if (board[i, j] == "RA")
-                    {
-                        my_board += 4;
-                    }
-                    else if (board[i, j] == "RPy")
-                    {
-                        my_board += 2;
-                    }
-                    else if (board[i, j] == "RPh")
-                    {
-                        my_board += 100;
-                    }
-                }
-            }
-
-            Console.WriteLine(my_board);
-            Console.WriteLine(opp_board);
-
-            return my_board - opp_board;
-        }
-        static void Laser(int[,] pieces, string[,] laser , string[,] name)
+        static List<Tuple<int,int>> shoot_laser_path(ref Piece[,] piece, int laser_direction, int i, int j)
         {
 
 
-            int i;
-            int j;
-            i = 7;
-            j = 9;
-            int LaserDir = 1;
+            List<Tuple<int, int>> coordinates_list = new List<Tuple<int, int>>();
             bool stop = false;
 
             while (i >= 0 && j >= 0 && i <= 7 && j <= 9)
             {
                 
-                
-                if (stop == true)
+                if (piece[i, j].type != Type.empty)
                 {
-                    break;
-                }
-                laser[i, j] = "*";
+                    var coordinates = Tuple.Create(i, j);
+                    coordinates_list.Add(coordinates);
 
-                if (pieces[i, j] != 0)
-                {
-                
-                    
-                    switch(name[i,j])
+                    switch (piece[i, j].type)
                     {
-                        case "S":
+                        case Type.scarab:
+
+
                             {
-                                rotate_laser( ref LaserDir,  pieces,  i, j); 
+                                rotate_laser(ref laser_direction, piece, i, j);
                                 break;
                             }
-                            
 
-                        case "Py":
+
+                        case Type.pyramid:
                             {
-                                if (pieces[i, j] != LaserDir && (pieces[i, j]%4) +1 != LaserDir)
+                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation % 4) + 1 != laser_direction)
                                 {
-                                    rotate_laser(ref LaserDir,pieces, i, j);
+                                    rotate_laser(ref laser_direction, piece, i, j);
                                 }
 
                                 else
                                 {
+                                    piece[i, j].type = Type.empty;
+
                                     stop = true;
+                                   
                                 }
                                 break;
                             }
 
-                        default:
+                        case Type.anubis:
                             {
+                                if (Math.Abs((int)piece[i, j].rotation - laser_direction) != 2)
+                                {
+                                    piece[i, j].type = Type.empty;
+                                }
                                 stop = true;
                                 break;
                             }
+
+                        case Type.pharoah:
+                            {
+                                piece[i, j].type = Type.empty;
+                               stop = true;
+                                    break;
+                            }
+
+                        default:
+                            {
+                                break;
+                            }
+
+
                     }
                     
                 }
 
-                new_laser_pos( LaserDir, ref i, ref j);
+                if (stop == true)
+                {
+                    break;
+                }
+                new_laser_pos(laser_direction, ref i, ref j);
 
             }
-
+            return coordinates_list;
 
         }
-        static void new_laser_pos( int LaserDir , ref int i , ref int j)
+
+
+
+        static void new_laser_pos( int laser_direction, ref int i , ref int j)
         {
-            switch (LaserDir)
+            switch (laser_direction)
             {
                 case 1:
                     {
@@ -215,18 +195,26 @@ namespace laser_not_final
 
            
         }
-        static void rotate_laser(ref int LaserDir,int[,] pieces, int i,int j)
+        static void rotate_laser(ref int laser_direction,Piece[,] piece, int i,int j)
         {
+           
 
-            if (pieces[i, j] == 3 || pieces[i, j] == 1)
+            if ((int)piece[i, j].rotation == 3 || (int)piece[i, j].rotation == 1)
             {
-                pieces[i, j] = 1;
+
+                piece[i, j].rotation = Rotation.up;
             }
-            else pieces[i, j] = -1;
+            else piece[i, j].rotation = Rotation.reverse;
             {
-                LaserDir = ((LaserDir * 3) % 4) + pieces[i, j];
-                if (LaserDir == 0) LaserDir = 4;
-                else if (LaserDir == -1) LaserDir = 3;
+                if (laser_direction % 2 == 0)
+                {
+                    laser_direction = (laser_direction % 4) + (int)piece[i, j].rotation;
+                }
+
+                else laser_direction = (laser_direction % 4) -(int) piece[i, j].rotation;
+
+                if (laser_direction == 0) laser_direction = 4;
+                else if (laser_direction == -1) laser_direction= 3;
 
             }
 

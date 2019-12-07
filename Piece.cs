@@ -15,12 +15,23 @@ public enum Type
 };
 
 
+public enum Value
+{
+    pyramid = 2,
+    anubis = 4,
+    pharoah = 100,
+    sphinx = 0,
+    scarab = 0,
+    empty = 0
+};
+
 public enum Rotation
 {
-    up = 0,
-    down = 1,
-    left = 2, 
-    right = 3
+    up = 1,
+    down = 3,
+    left = 4, 
+    right = 2,
+    reverse = -1
 }
 
 
@@ -35,9 +46,11 @@ public class Piece
     public Rotation rotation;
     public Color color;
     public Type type;
+    public Value value;
 
-    public Piece(Rotation rotation, Color color, Type type)
+    public Piece(Rotation rotation, Color color, Type type, Value value)
     {
+        this.value = value;
         this.rotation = rotation;
         this.color = color;
         this.type = type;
@@ -45,6 +58,6 @@ public class Piece
 
     public static Piece Clone(Piece x)
     {
-        return new Piece(x.rotation, x.color, x.type);
+        return new Piece(x.rotation, x.color, x.type,x.value);
     }
 }

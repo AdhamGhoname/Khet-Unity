@@ -21,7 +21,7 @@ namespace DSALGOPROJECT
                     if (board[i, j].type != 0)
                     {
                         int bestmove;
-                        bestmove = Minimax(ref board,i, j, 4, true,board[i,j].rotation,ref desx,ref desy,ref desr);
+                        bestmove = Minimax(ref board,i, j, 4, true,(int)board[i,j].rotation,ref desx,ref desy,ref desr);
                     }
             }
         }
@@ -45,37 +45,37 @@ namespace DSALGOPROJECT
                             board[i, j].type = 0;
                             if (numlev == 4)
                             {
-                                if (max < Minimax(ref board,i + a, j + b, numlev - 1, false, board[i + a, j + b].rotation,ref desx,ref desy,ref desr)){
-                                    desr = board[i + a, j + b].rotation;
+                                if (max < Minimax(ref board,i + a, j + b, numlev - 1, false, (int)board[i + a, j + b].rotation,ref desx,ref desy,ref desr)){
+                                    desr =(int) board[i + a, j + b].rotation;
                                     desx = i + a;
                                     desy = i + b;
                                 }
                             }
                             else
                             {
-                                max = Math.Max(max, Minimax(ref board,i + a, j + b, numlev - 1, false, board[i + a, j + b].rotation,ref desx,ref desy,ref desr)); 
+                                max = Math.Max(max, Minimax(ref board,i + a, j + b, numlev - 1, false,(int) board[i + a, j + b].rotation,ref desx,ref desy,ref desr)); 
                             }
                             board[i, j] = board[i + a, j + b];
                             board[i + a, j + b].type = 0;
                         }
                         else if ((a == b && b == 0))
                         {
-                            if (max < Minimax(ref board,i, j, numlev - 1, false, (board[i, j].rotation + 1) % 4,ref desx,ref desy,ref desr))
+                            if (max < Minimax(ref board,i, j, numlev - 1, false, (int)(board[i, j].rotation + 1) % 4,ref desx,ref desy,ref desr))
                             {
-                                max = Minimax(ref board,i, j, numlev - 1, false, (board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr);
+                                max = Minimax(ref board,i, j, numlev - 1, false, (int)(board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr);
                                 if(numlev == 4)
                                 {
-                                    desr = (board[i, j].rotation + 1) % 4;
+                                    desr = (int)(board[i, j].rotation + 1) % 4;
                                     desx = i;
                                     desy = i;
                                 }
                             }
-                            else if (max < Minimax(ref board,i, j + b, numlev - 1, false, (board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr))
+                            else if (max < Minimax(ref board,i, j + b, numlev - 1, false, (int)(board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr))
                             {
-                                max = Minimax(ref board,i, j, numlev - 1, false, (board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr);
+                                max = Minimax(ref board,i, j, numlev - 1, false,(int) (board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr);
                                 if (numlev == 4)
                                 {
-                                    desr = (board[i, j].rotation + 3) % 4;
+                                    desr = (int)(board[i, j].rotation + 3) % 4;
                                     desx = i;
                                     desy = i;
                                 }
@@ -95,19 +95,19 @@ namespace DSALGOPROJECT
                         {
                             board[i + a, j + b] = board[i, j];
                             board[i, j].type = 0;
-                            min = Math.Min(min, Minimax(ref board,i + a, j + b, numlev - 1, true, board[i + a, j + b].rotation, ref desx, ref desy, ref desr));
+                            min = Math.Min(min, Minimax(ref board,i + a, j + b, numlev - 1, true,(int) board[i + a, j + b].rotation, ref desx, ref desy, ref desr));
                             board[i, j] = board[i + a, j + b];
                             board[i + a, j + b].type = 0;
                         }
                         else if ((a == b && b == 0))
                         {
-                            if (min < Minimax(ref board,i, j, numlev - 1, true, (board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr))
+                            if (min < Minimax(ref board,i, j, numlev - 1, true, (int)(board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr))
                             {
-                                min = Minimax(ref board,i, j, numlev - 1, true, (board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr);
+                                min = Minimax(ref board,i, j, numlev - 1, true, (int)(board[i, j].rotation + 1) % 4, ref desx, ref desy, ref desr);
                             }
-                            else if (min < Minimax(ref board,i, j + b, numlev - 1, true, (board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr))
+                            else if (min < Minimax(ref board,i, j + b, numlev - 1, true,(int)(board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr))
                             {
-                                min = Minimax(ref board,i, j, numlev - 1, true, (board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr);
+                                min = Minimax(ref board,i, j, numlev - 1, true, (int)(board[i, j].rotation + 3) % 4, ref desx, ref desy, ref desr);
                             }
                         }
                     }
@@ -115,5 +115,33 @@ namespace DSALGOPROJECT
             }
             return 0;
         }
+        static int CheckBoard(Piece[,] piece)
+        {
+
+            int my_board = 0;
+            int opp_board = 0;
+
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    if(piece[i,j].color == Color.red)
+                    {
+                        my_board += (int)piece[i, j].value;
+                            
+                    }
+                    if (piece[i, j].color == Color.silver)
+                    {
+                        opp_board += (int)piece[i, j].value;
+
+                    }
+
+                }
+            }
+            
+            return my_board - opp_board;
+        }
+
     }
 }
