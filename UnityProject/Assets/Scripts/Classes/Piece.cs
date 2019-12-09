@@ -18,13 +18,13 @@ public enum Type
 public enum Rotation
 {
     up = 0,
-    down = 1,
-    left = 2, 
-    right = 3
+    right = 1,
+    down = 2,
+    left = 3, 
 }
 
 
-public enum Color
+public enum color
 {
     silver = 0,
     red = 1
@@ -33,10 +33,10 @@ public enum Color
 public class Piece
 {
     public Rotation rotation;
-    public Color color;
+    public color color;
     public Type type;
 
-    public Piece(Rotation rotation, Color color, Type type)
+    public Piece(Rotation rotation, color color, Type type)
     {
         this.rotation = rotation;
         this.color = color;
