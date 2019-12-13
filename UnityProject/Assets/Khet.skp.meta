@@ -1,0 +1,303 @@
+fileFormatVersion: 2
+guid: 0d281920a9c36494d900462078bf85d3
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f000000400000004100000042000000430000004400000045000000460000004700000048000000490000004a0000004b0000004c0000004d0000004e0000004f00000050000000
+  assetHash:
+    serializedVersion: 2
+    Hash: 9308379113755bd9f16e5f16e7917584
+  longitude: -105.283
+  latitude: 40.017
+  northCorrection: -0
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: 0.6023584, y: 0.36672828, z: 0.61233264}
+      lookAt: {x: 0.25797385, y: -0.026007103, z: 0.21844919}
+      up: {x: -0.39514452, y: 0.79975736, z: -0.4519391}
+      fov: 35
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Djed (red)
+    100002: Djed (silver)
+    100004: Djed post cap (red)
+    100006: Djed post cap (red) 1
+    100008: Djed post cap (silver)
+    100010: Djed post cap (silver) 1
+    100012: Eye of Horus (red)
+    100014: Eye of Horus (silver)
+    100016: Group 31
+    100018: Group 33
+    100020: Group 63
+    100022: Group 65
+    100024: //RootNode
+    100026: Khet gameboard
+    100028: Laser Button
+    100030: Laser Button 1
+    100032: Laser Emitter
+    100034: Laser Emitter 1
+    100036: Obelisk (red)
+    100038: Obelisk (red) 1
+    100040: Obelisk (red) 2
+    100042: Obelisk (red) 3
+    100044: Obelisk (silver)
+    100046: Obelisk (silver) 1
+    100048: Obelisk (silver) 2
+    100050: Obelisk (silver) 3
+    100052: Pharaoh (red)
+    100054: Pharaoh (silver)
+    100056: Pyramid (red)#1
+    100058: Pyramid (red)#1 1
+    100060: Pyramid (red)#1 2
+    100062: Pyramid (red)#1 3
+    100064: Pyramid (red)#1 4
+    100066: Pyramid (red)#1 5
+    100068: Pyramid (red)#1 6
+    100070: Pyramid (silver)
+    100072: Pyramid (silver) 1
+    100074: Pyramid (silver) 2
+    100076: Pyramid (silver) 3
+    100078: Pyramid (silver) 4
+    100080: Pyramid (silver) 5
+    400000: Djed (red)
+    400002: Djed (silver)
+    400004: Djed post cap (red)
+    400006: Djed post cap (red) 1
+    400008: Djed post cap (silver)
+    400010: Djed post cap (silver) 1
+    400012: Eye of Horus (red)
+    400014: Eye of Horus (silver)
+    400016: Group 31
+    400018: Group 33
+    400020: Group 63
+    400022: Group 65
+    400024: //RootNode
+    400026: Khet gameboard
+    400028: Laser Button
+    400030: Laser Button 1
+    400032: Laser Emitter
+    400034: Laser Emitter 1
+    400036: Obelisk (red)
+    400038: Obelisk (red) 1
+    400040: Obelisk (red) 2
+    400042: Obelisk (red) 3
+    400044: Obelisk (silver)
+    400046: Obelisk (silver) 1
+    400048: Obelisk (silver) 2
+    400050: Obelisk (silver) 3
+    400052: Pharaoh (red)
+    400054: Pharaoh (silver)
+    400056: Pyramid (red)#1
+    400058: Pyramid (red)#1 1
+    400060: Pyramid (red)#1 2
+    400062: Pyramid (red)#1 3
+    400064: Pyramid (red)#1 4
+    400066: Pyramid (red)#1 5
+    400068: Pyramid (red)#1 6
+    400070: Pyramid (silver)
+    400072: Pyramid (silver) 1
+    400074: Pyramid (silver) 2
+    400076: Pyramid (silver) 3
+    400078: Pyramid (silver) 4
+    400080: Pyramid (silver) 5
+    2100000: _defaultMat
+    2100002: '[Metal_Aluminum_Anodized]'
+    2100004: '[Metal_Corrogated_Shiny]'
+    2100006: '[Translucent_Glass_Gray]'
+    2100008: '[Color_A07]'
+    2100010: '[Color_008]'
+    2100012: IMG_6464-1
+    2100014: '[Color_A11]'
+    2100016: '[Color_005]'
+    2100018: '[Color_A01]'
+    2100020: '[0044_DarkGoldenrod]'
+    2300000: Djed (red)
+    2300002: Djed (silver)
+    2300004: Djed post cap (red)
+    2300006: Djed post cap (red) 1
+    2300008: Djed post cap (silver)
+    2300010: Djed post cap (silver) 1
+    2300012: Eye of Horus (red)
+    2300014: Eye of Horus (silver)
+    2300016: Group 31
+    2300018: Group 33
+    2300020: Group 63
+    2300022: Group 65
+    2300024: Khet gameboard
+    2300026: Laser Button
+    2300028: Laser Button 1
+    2300030: Laser Emitter
+    2300032: Laser Emitter 1
+    2300034: Obelisk (red)
+    2300036: Obelisk (red) 1
+    2300038: Obelisk (red) 2
+    2300040: Obelisk (red) 3
+    2300042: Obelisk (silver)
+    2300044: Obelisk (silver) 1
+    2300046: Obelisk (silver) 2
+    2300048: Obelisk (silver) 3
+    2300050: Pharaoh (red)
+    2300052: Pharaoh (silver)
+    2300054: Pyramid (red)#1
+    2300056: Pyramid (red)#1 1
+    2300058: Pyramid (red)#1 2
+    2300060: Pyramid (red)#1 3
+    2300062: Pyramid (red)#1 4
+    2300064: Pyramid (red)#1 5
+    2300066: Pyramid (red)#1 6
+    2300068: Pyramid (silver)
+    2300070: Pyramid (silver) 1
+    2300072: Pyramid (silver) 2
+    2300074: Pyramid (silver) 3
+    2300076: Pyramid (silver) 4
+    2300078: Pyramid (silver) 5
+    3300000: Djed (red)
+    3300002: Djed (silver)
+    3300004: Djed post cap (red)
+    3300006: Djed post cap (red) 1
+    3300008: Djed post cap (silver)
+    3300010: Djed post cap (silver) 1
+    3300012: Eye of Horus (red)
+    3300014: Eye of Horus (silver)
+    3300016: Group 31
+    3300018: Group 33
+    3300020: Group 63
+    3300022: Group 65
+    3300024: Khet gameboard
+    3300026: Laser Button
+    3300028: Laser Button 1
+    3300030: Laser Emitter
+    3300032: Laser Emitter 1
+    3300034: Obelisk (red)
+    3300036: Obelisk (red) 1
+    3300038: Obelisk (red) 2
+    3300040: Obelisk (red) 3
+    3300042: Obelisk (silver)
+    3300044: Obelisk (silver) 1
+    3300046: Obelisk (silver) 2
+    3300048: Obelisk (silver) 3
+    3300050: Pharaoh (red)
+    3300052: Pharaoh (silver)
+    3300054: Pyramid (red)#1
+    3300056: Pyramid (red)#1 1
+    3300058: Pyramid (red)#1 2
+    3300060: Pyramid (red)#1 3
+    3300062: Pyramid (red)#1 4
+    3300064: Pyramid (red)#1 5
+    3300066: Pyramid (red)#1 6
+    3300068: Pyramid (silver)
+    3300070: Pyramid (silver) 1
+    3300072: Pyramid (silver) 2
+    3300074: Pyramid (silver) 3
+    3300076: Pyramid (silver) 4
+    3300078: Pyramid (silver) 5
+    4300000: Mesh Pyramid (silver)
+    4300002: Mesh Eye of Horus (silver)
+    4300004: Mesh Obelisk (silver)
+    4300006: Mesh Obelisk (red)
+    4300008: Mesh Eye of Horus (red)
+    4300010: Mesh Pyramid (red)#1
+    4300012: Mesh Pharaoh (red)
+    4300014: Mesh Djed (silver)
+    4300016: Mesh Group 31
+    4300018: Mesh Group 33
+    4300020: Mesh Djed post cap (silver)
+    4300022: Mesh Djed post cap (silver)
+    4300024: Mesh Pharaoh (silver)
+    4300026: Mesh Djed (red)
+    4300028: Mesh Group 63
+    4300030: Mesh Djed post cap (red)
+    4300032: Mesh Khet gameboard
+    4300034: Mesh Laser Button
+    4300036: Mesh Laser Emitter
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
