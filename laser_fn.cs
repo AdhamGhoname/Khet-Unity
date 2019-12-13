@@ -32,7 +32,7 @@ namespace laser_not_final
 
                         case Type.pyramid:
                             {
-                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation %4) +1 != laser_direction)
+                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation+1 %4) != laser_direction)
                                 {
                                     rotate_laser(ref laser_direction, piece, i, j);
                                 }
@@ -85,6 +85,7 @@ namespace laser_not_final
 
         static List<Tuple<int,int>> shoot_laser_path(ref Piece[,] piece, int laser_direction, int i, int j)
         {
+            
 
 
             List<Tuple<int, int>> coordinates_list = new List<Tuple<int, int>>();
@@ -111,7 +112,7 @@ namespace laser_not_final
 
                         case Type.pyramid:
                             {
-                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation % 4) + 1 != laser_direction)
+                                if ((int)piece[i, j].rotation != laser_direction && ((int)piece[i, j].rotation+1 % 4)  != laser_direction)
                                 {
                                     rotate_laser(ref laser_direction, piece, i, j);
                                 }
@@ -170,22 +171,22 @@ namespace laser_not_final
         {
             switch (laser_direction)
             {
-                case 1:
+                case 0:
                     {
                         --i;
                         break;
                     }
-                case 2:
+                case 1:
                     {
                         ++j;
                         break;
                     }
-                case 3:
+                case 2:
                     {
                         ++i;
                         break;
                     }
-                case 4:
+                case 3:
                     {
                         --j;
                         break;
@@ -199,21 +200,21 @@ namespace laser_not_final
         {
            
 
-            if ((int)piece[i, j].rotation == 3 || (int)piece[i, j].rotation == 1)
+            if ((int)piece[i, j].rotation == 2 || (int)piece[i, j].rotation == 0)
             {
 
-                piece[i, j].rotation = Rotation.up;
+                piece[i, j].rotation = Rotation.right;
             }
             else piece[i, j].rotation = Rotation.reverse;
             {
-                if (laser_direction % 2 == 0)
+                if (laser_direction % 2 != 0)
                 {
                     laser_direction = (laser_direction % 4) + (int)piece[i, j].rotation;
                 }
 
                 else laser_direction = (laser_direction % 4) -(int) piece[i, j].rotation;
 
-                if (laser_direction == 0) laser_direction = 4;
+                if (laser_direction == 4) laser_direction = 0;
                 else if (laser_direction == -1) laser_direction= 3;
 
             }
