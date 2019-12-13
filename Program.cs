@@ -9,129 +9,221 @@ namespace ConsoleApp4
      
     class Program
     {
-        static  int desx = 0;
-         static int desy = 0;
-        static int desr = 0;
+        const int MaxLev = 4;
+        static int[] bestChoice = new int[0];
 
-        static void Main(string[] args)
+        static int[] GetBestMove(Board board)
         {
+            Minimax(board, MaxLev, false);
+            return bestChoice;
+        }
+        static void Main()
+        {
+            Board board = new Board();
+            //board[0, 3].type = Type.empty;
+            //board[0, 3].value = Value.empty;
 
-            Board board = new Board ();
-            // 1 and 2 the notation of the best piece can move now , 3 4 and 5 which move or rotate is best foe this piece 
-            Tuple<int, int, int , int , int > finaldesyrd = new Tuple<int, int, int , int , int >(-1 , -1 , -1  , -1 , -1 );
-            int bestmove = 9999999 , r ;
-            for (int i = 0; i < 8; i++)
+            int[] move = GetBestMove(board);
+            Console.WriteLine(move.Length);
+            foreach (int x in move)
             {
-                for (int j = 0; j < 10; j++)
-                    if (board[i, j].type != Type.empty)
-                    {
-                        r  = Minimax( board, i, j, 4, true, (int)board[i, j].rotation);
-                        if (r>bestmove)
-                        {
-                            finaldesyrd.Item1.Equals(i);
-                            finaldesyrd.Item2.Equals(j);
-                            finaldesyrd.Item3.Equals(desx);
-                            finaldesyrd.Item4.Equals(desy);
-                            finaldesyrd.Item5.Equals(desr);
-                            bestmove = r;
-                        }
-                    }
+                Console.WriteLine(x);
             }
         }
-        static public int Minimax(Board board , int i, int j, int numlev, bool turn, int rot)
+
+  
+        //turn = false for red.
+        static public int Minimax(Board board, int numlev, bool turn)
         {
 
             if (numlev == 0)
             {
-                return CheckBoard(board);
+                int value = CheckBoard(board);
+
+                return value;
             }
             if (turn)
             {
                 int max = -999999999;
-                for (int a = -1; a < 2; a++)
+                for (int i = 0; i < 10; i++)
                 {
-                    for (int b = -1; b < 2; b++)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (board.CanMove(i, j, i + a, i + b))
+                        if (board[i,j].type != Type.empty && board[i,j].color == color.silver)
                         {
-                            Board clboard = new Board.Clone(board);
-                            clboard.MakeMove(i, j, i + a, i + b);
-
-                            if (numlev == 4)
+                            for (int a = -1; a < 2; a++)
                             {
-
-                                if (max < Minimax(clboard, i + a, j + b, numlev - 1, false, (int)clboard[i + a, j + b].rotation))
+                                for (int b = -1; b < 2; b++)
                                 {
-                                    desr = (int)board[i + a, j + b].rotation;
-                                    desx = i + a;
-                                    desy = i + b;
+                                    //Try all rotations;
+                                    if ((a == b && b == 0))
+                                    {
+                                        Board clboard1 = board.Clone();
+                                        Board clboard2 = board.Clone();
+                                        bool turnLeft = clboard1.RotateLeft(i, j);
+
+                                        bool turnRight = clboard2.RotateRight(i, j);
+                                        if (turnLeft)
+                                        {
+                                            Laser.shoot_laser(ref clboard1, (int)clboard1[9, 7].rotation, 9, 7);
+                                            int rleft = Minimax(clboard1, numlev - 1, !turn);
+                                            if (max < rleft)
+                                            {
+                                                max = rleft;
+                                                if (numlev == MaxLev)
+                                                {
+                                                    int[] best = new int[3];
+                                                    best[0] = i;
+                                                    best[1] = j;
+                                                    best[2] = -1;
+                                                    bestChoice = best;
+                                                }
+                                            }
+                                        }
+                                        if (turnRight)
+                                        {
+                                            Laser.shoot_laser(ref clboard2, (int)clboard2[9, 7].rotation, 9, 7);
+                                            int rright = Minimax(clboard2, numlev - 1, !turn);
+                                            if (max < rright)
+                                            {
+                                                max = rright;
+                                                if (numlev == MaxLev)
+                                                {
+                                                    int[] best = new int[3];
+                                                    best[0] = i;
+                                                    best[1] = j;
+                                                    best[2] = 1;
+                                                    bestChoice = best;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    //Try to move the piece at (i, j) by displacement of (a, b)
+                                    else if (board.CanMove(i, j, i + a, j + b))
+                                    {
+                                        Board clboard = board.Clone();
+                                        clboard.MakeMove(i, j, i + a, j + b);
+                                        Laser.shoot_laser(ref clboard, (int)clboard[9, 7].rotation, 9, 7);
+
+
+                                        if (numlev == MaxLev)
+                                        {
+                                            int val = Minimax(clboard, numlev - 1, !turn);
+                                            if (max < val) 
+                                            {
+                                                max = val;
+                                                int[] best = new int[4];
+                                                best[0] = i;
+                                                best[1] = j;
+                                                best[2] = i + a;
+                                                best[3] = j + b;
+                                                bestChoice = best;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            max = Math.Max(max, Minimax(clboard, numlev-1, !turn));
+                                        }
+                                    }
                                 }
                             }
-                            else
-                            {
-                                max = Math.Max(max, Minimax(clboard, i + a, j + b, numlev - 1, false, (int)clboard[i + a, j + b].rotation));
-                            }
-                        }
-                        else if ((a == b && b == 0))
-                        {
-                            Board clboard = new Board.Clone(board);
-                            int rright = Minimax(clboard, i, j, numlev - 1, false, (int)(clboard[i, j].rotation + 1) % 4);
-                            int rleft = Minimax(clboard, i, j, numlev - 1, false, (int)(clboard[i, j].rotation + 3) % 4);
-                            if (max < rright)
-                            {
-                                max = rright ;
-                                if (numlev == 4)
-                                {
-                                    desr = (int)(board[i, j].rotation + 1) % 4;
-                                    desx = i;
-                                    desy = i;
-                                }
-                            }
-                        else if (max < rleft)
-                        {
-                            max = rleft;
-                            if (numlev == 4)
-                            {
-                                desr = (int)(board[i, j].rotation + 3) % 4;
-                                desx = i;
-                                desy = i;
-                            }
-                        }
                         }
                     }
                 }
+                return max;
             }
             else
             {
                 int min = 999999999;
-                for (int a = -1; a < 2; a++)
+                for (int i = 0; i < 10; i++)
                 {
-                    for (int b = -1; b < 2; b++)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (board.CanMove(i, j, i + a, i + b))
+                        if (board[i, j].type != Type.empty && board[i, j].color == color.red)
                         {
-                            Board clboard = new Board.Clone(board);
-                            clboard.MakeMove(i, j, i + a, i + b);
-                            min = Math.Min(min, Minimax(clboard, i + a, j + b, numlev - 1, true, (int)clboard[i + a, j + b].rotation));
-                        }
-                        else if ((a == b && b == 0))
-                        {
-                            Board clboard = new Board.Clone(board);
-                            int rright  = Minimax(clboard, i, j, numlev - 1, true, (int)(clboard[i, j].rotation + 1) % 4);
-                            int rleft = Minimax(clboard, i, j, numlev - 1, true, (int)(clboard[i, j].rotation + 3) % 4);
+                            for (int a = -1; a < 2; a++)
+                            {
+                                for (int b = -1; b < 2; b++)
+                                {
+                                    //Try all rotations;
+                                    if ((a == b && b == 0))
+                                    {
+                                        Board clboard1 = board.Clone();
+                                        Board clboard2 = board.Clone();
+                                        bool turnLeft = clboard1.RotateLeft(i, j);
+                                        bool turnRight = clboard2.RotateRight(i, j);
+                                        if (turnLeft)
+                                        {
+                                            List<Tuple<int,int>> points = Laser.shoot_laser_path(ref clboard1, (int)clboard1[0, 0].rotation, 0, 0);
+                                            int rleft = Minimax(clboard1, numlev - 1, !turn);
+                                            if (min >= rleft)
+                                            {
+                                                min = rleft;
+                                                if (numlev == MaxLev)
+                                                {
+                                                    Console.WriteLine(clboard1[0, 0].rotation);
+                                                    Console.WriteLine(clboard1[4, 0].type);
+                                                    Console.WriteLine(points[points.Count - 1]);
+                                                    int[] best = new int[3];
+                                                    best[0] = i;
+                                                    best[1] = j;
+                                                    best[2] = -1;
+                                                    bestChoice = best;
+                                                }
+                                            }
+                                        }
+                                        if (turnRight)
+                                        {
+                                            Laser.shoot_laser(ref clboard2, (int)clboard2[0, 0].rotation, 0, 0);
+                                            int rright = Minimax(clboard2, numlev - 1, !turn);
+                                            if (min > rright)
+                                            {
+                                                min = rright;
+                                                if (numlev == MaxLev)
+                                                {
+                                                    int[] best = new int[3];
+                                                    best[0] = i;
+                                                    best[1] = j;
+                                                    best[2] = 1;
+                                                    bestChoice = best;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    //Try to move the piece at (i, j) by displacement of (a, b)
+                                    else if (board.CanMove(i, j, i + a, j + b))
+                                    {
+                                        Board clboard = board.Clone();
+                                        clboard.MakeMove(i, j, i + a, j + b);
+                                        Laser.shoot_laser(ref clboard, (int)clboard[0, 0].rotation, 0, 0);
 
-                            if (min < rright)
-                                min = rright;
 
-                            else if (min < rleft)
-                                min = rleft;
-                            
+                                        if (numlev == MaxLev)
+                                        {
+                                            int val = Minimax(clboard, numlev - 1, !turn);
+                                            if (min > val)
+                                            {
+                                                min = val;
+                                                int[] best = new int[4];
+                                                best[0] = i;
+                                                best[1] = j;
+                                                best[2] = i + a;
+                                                best[3] = j + b;
+                                                bestChoice = best;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            min = Math.Min(min, Minimax(clboard, numlev - 1, !turn));
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                  
                 }
+                return min;
             }
-            return 0;
         }
         static int CheckBoard(Board piece )
         {
@@ -140,16 +232,16 @@ namespace ConsoleApp4
             int opp_board = 0;
 
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    if (piece[i, j].color == Color.red)
+                    if (piece[i, j].color == color.silver && piece[i,j].type != Type.empty)
                     {
                         my_board += (int)piece[i, j].value;
 
                     }
-                    if (piece[i, j].color == Color.silver)
+                    if (piece[i, j].color == color.red && piece[i, j].type != Type.empty)
                     {
                         opp_board += (int)piece[i, j].value;
 
@@ -158,7 +250,7 @@ namespace ConsoleApp4
                 }
             }
 
-            return my_board - opp_board;
+            return (my_board - opp_board);
         }
 
     }
